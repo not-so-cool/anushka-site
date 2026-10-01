@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens (space-separated RGB channels so Tailwind can add alpha) */
+/* ------------------------------------------------------------------ */
+:root {
+  --ivory: 244 238 226;
+  --paper: 236 227 210;
+  --paper-deep: 225 214 194;
+  --charcoal: 35 33 30;
+  --charcoal-soft: 74 70 63;
+  --clay: 156 86 56;
+  --sage: 125 133 112;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background-color: rgb(var(--ivory));
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: clip; /* clip (not hidden) keeps pinning and sticky working */
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgb(var(--clay) / 0.25);
+    color: rgb(var(--charcoal));
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--clay));
+    outline-offset: 4px;
+  }
+
+  /* Lenis recommended rules */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Components                                                          */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Tiny handwritten annotations — the only place the hand font appears */
+  .hand {
+    @apply font-hand text-hand text-clay;
+    font-weight: 400;
+  }
+
+  /* ---- Split text ---- */
+  .split-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .split-unit {
+    display: inline-block;
+  }
+  .split-mask {
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+
+  /* ---- Photo print ---- */
+  .print {
+    position: relative;
+    display: block;
+  }
+
+  .print-inner {
+    position: relative;
+    padding: clamp(6px, 1.1vw, 12px);
+    background-color: rgb(250 246 238);
+    box-shadow:
+      0 1px 1px rgb(var(--charcoal) / 0.12),
+      0 2px 6px rgb(var(--charcoal) / 0.08),
+      0 14px 28px -12px rgb(var(--charcoal) / 0.32);
+    outline: 1px solid rgb(var(--charcoal) / 0.05);
+    transform: rotate(var(--rot, 0deg));
+    transition:
+      transform 0.8s var(--ease-out),
+      box-shadow 0.8s var(--ease-out);
+  }
+
+  .print-photo {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(var(--paper-deep));
+  }
+
+  /* A whisper of warmth + edge falloff so photos feel printed, not screened */
+  .print-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: rgb(var(--clay) / 0.07);
+    mix-blend-mode: multiply;
+    box-shadow: inset 0 0 40px rgb(var(--charcoal) / 0.14);
+  }
+
+  .print-caption {
+    position: absolute;
+    left: 0.25rem;
+    top: 100%;
+    margin-top: 0.7rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.6s var(--ease-out);
+  }
+  .print-caption[data-mode='always'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .print:hover .print-inner {
+      transform: rotate(calc(var(--rot, 0deg) + var(--hover-delta, -1deg))) scale(1.025);
+      box-shadow:
+        0 1px 1px rgb(var(--charcoal) / 0.12),
+        0 4px 10px rgb(var(--charcoal) / 0.1),
+        0 26px 44px -16px rgb(var(--charcoal) / 0.38);
+    }
+    .print:hover .print-caption,
+    .print:focus-within .print-caption {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Touch: no hover dependence — captions are simply visible */
+  @media (hover: none) {
+    .print-caption {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ---- Missing-image placeholder ---- */
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    text-align: center;
+    background-color: rgb(var(--paper-deep));
+    color: rgb(var(--charcoal-soft));
+    box-shadow: inset 0 0 0 1px rgb(var(--charcoal) / 0.12);
+  }
+  .placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0.6rem;
+    border: 1px dashed rgb(var(--charcoal) / 0.28);
+    pointer-events: none;
+  }
+  .placeholder-label {
+    position: relative;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    word-break: break-all;
+  }
+
+  /* ---- Custom cursor ---- */
+  .cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 84px;
+    height: 84px;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    z-index: 9500;
+  }
+  .cursor-ring {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 1px solid rgb(var(--charcoal) / 0.55);
+  }
+  .cursor-disc {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background-color: rgb(var(--ivory) / 0.94);
+    box-shadow: 0 6px 20px -8px rgb(var(--charcoal) / 0.35);
+  }
+  .cursor-label {
+    position: relative;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(var(--charcoal));
+  }
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+
+  /* ---- Overlays ---- */
+  .paper-texture {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.6' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.35  0 0 0 0 0.22  0 0 0 0.22 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+    background-size: 400px 400px;
+  }
+
+  .grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 9000;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 240px 240px;
+    animation: grain-shift 1.4s steps(6) infinite;
+  }
+
+  @keyframes grain-shift {
+    0%   { transform: translate3d(0, 0, 0); }
+    17%  { transform: translate3d(-3%, 2%, 0); }
+    34%  { transform: translate3d(2%, -4%, 0); }
+    51%  { transform: translate3d(-4%, -1%, 0); }
+    68%  { transform: translate3d(3%, 3%, 0); }
+    85%  { transform: translate3d(-1%, 4%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                      */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  .grain {
+    animation: none;
+  }
+  .print-inner,
+  .print-caption {
+    transition-duration: 0.01ms;
+  }
+}
