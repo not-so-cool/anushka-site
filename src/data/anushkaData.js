@@ -194,7 +194,7 @@ Here's to the next chapter.
 
 — God of Thunder`,
   },
-
+// Updated website content
   /* 6 — INDIA → PARIS */
   journey: {
     intro: 'And then you moved.',
