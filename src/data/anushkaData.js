@@ -109,7 +109,7 @@ const anushkaData = {
         src: '/images/memory-04.jpg',
         alt: 'A more recent photo of us. Replace with a real description.',
         focal: '50% 35%',
-        caption: '23, damn. You are getting old',
+        caption: '23! You are getting old',
       },
     ],
     horizontal: [
@@ -146,7 +146,7 @@ const anushkaData = {
 
   /* 4 — THINGS I REMEMBER (`from`: left | right | up | down) */
   remember: {
-    heading: 'Things I remember',
+    heading: 'Things I wont forget, ever',
     lines: [
       { text: 'the stupid conversations', from: 'left' },
       { text: 'the ups and downs', from: 'right' },
@@ -155,6 +155,14 @@ const anushkaData = {
       { text: 'watching life change around us', from: 'down' },
       { text: 'growing up without really noticing', from: 'right' },
     ],
+  },
+
+      screen: {
+    heading: 'Creed Anushka.',
+    title: 'Birthday scene from your favourite show',
+    videoSrc: '/videos/birthday.mp4',
+    poster: '',
+    note: 'happy birthday, the way it should be done',
   },
 
   /* 5 — A SMALL LETTER
@@ -170,13 +178,17 @@ It's long enough to remember completely different versions of ourselves, and som
 
 From being kids to whatever we're supposed to call ourselves now...
 
-and now you're in Paris.
+and now you're in France, long way from home.
 
 There's something really cool about watching someone you've known for half your life start an entirely new chapter.
 
 So this isn't really a goodbye.
 
-It's just a reminder that no matter how far away life takes us, there will always be a version of us somewhere back there — figuring things out, laughing at something stupid, and growing up together.
+It's just a reminder that no matter how far away life takes us, there will always be a version of us somewhere back there, laughing at something stupid, and growing up together.
+
+Hopefully, our next meet happens in Europe, cant wait for that!
+
+(PS: Dont forget about our secret mission "Baguette Breakout")
 
 Here's to the next chapter.
 
@@ -186,8 +198,8 @@ Here's to the next chapter.
   /* 6 — INDIA → PARIS */
   journey: {
     intro: 'And then you moved.',
-    route: 'India → Rouen',
-    from: { label: 'India', coords: '20.59° N, 78.96° E' },
+    route: 'Pune → Rouen',
+    from: { label: 'Pune', coords: '20.59° N, 78.96° E' },
     to: { label: 'Rouen', coords: '49.44° N 1.09° E' },
     reveal: {
       title: 'Rouen',
@@ -218,7 +230,7 @@ Here's to the next chapter.
         src: '/images/paris-03.jpg',
         alt: 'Her university in Paris. Replace with a real description.',
         focal: '50% 40%',
-        caption: 'new people',
+        caption: '',
       },
       {
         id: 'chapter-cafe',
@@ -250,10 +262,11 @@ Here's to the next chapter.
     lines: [
       { text: '15 years down.', hold: 1.1 },
       { text: 'Who knows how many to go.', hold: 2.0 },
-      { text: 'The next time we meet, it wll be in Europe. Hopefully...', hold: 2.0 },
-      { text: 'Happy Birthday, Formula.', hold: 1.4, small: true },
+      { text: 'The next time we meet, it’ll be somewhere in Europe.', hold: 2.0 },
+      { text: 'Not goodbye. Just until then.', hold: 1.4, small: true },
     ],
     heart: '♥',
+    candle: { hint: 'make a wish', after: 'Happy birthday, Anushka.' },
   },
 }
 

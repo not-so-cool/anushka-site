@@ -6,6 +6,7 @@ import Opening from './sections/Opening'
 import Years from './sections/Years'
 import MemoryWall from './sections/MemoryWall'
 import Remember from './sections/Remember'
+import Screen from './sections/Screen'
 import Letter from './sections/Letter'
 import Journey from './sections/Journey'
 import Chapter from './sections/Chapter'
@@ -24,6 +25,7 @@ export default function App() {
         <Years data={anushkaData.years} />
         <MemoryWall data={anushkaData.memoryWall} />
         <Remember data={anushkaData.remember} />
+        <Screen data={anushkaData.screen} />
         <Letter data={anushkaData.letter} />
         <Journey data={anushkaData.journey} />
         <Chapter data={anushkaData.chapter} />

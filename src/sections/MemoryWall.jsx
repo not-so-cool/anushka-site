@@ -19,12 +19,12 @@ const SCATTER = [
     aspect: '4 / 5', rot: -2.5, hover: -1.2, mask: 'vertical', speed: 10, start: 90,
   },
   {
-    wrap: 'z-10 -mt-[20vw] ml-auto mr-[5vw] w-[40vw] md:-mt-[14vw] md:ml-[32vw] md:mr-0 md:w-[22vw]',
+    wrap: 'z-10 -mt-[20vw] ml-auto mr-[5vw] w-[36vw] md:-mt-[12vw] md:ml-[32vw] md:mr-0 md:w-[22vw]',
     aspect: '1 / 1', rot: 3.5, hover: 1.2, mask: 'horizontal', speed: 26, start: 85,
   },
   {
-    wrap: '-mt-[4vw] ml-[18vw] w-[32vw] md:-mt-[30vw] md:ml-auto md:mr-[9vw] md:w-[17vw]',
-    aspect: '3 / 4', rot: -4, hover: -1.5, mask: 'rounded', speed: 42, start: 88,
+    wrap: '-mt-[4vw] ml-[18vw] w-[32vw] md:-mt-[30vw] md:ml-auto md:mr-[9vw] md:w-[20vw]',
+    aspect: '4 / 4', rot: -4, hover: -1.5, mask: 'rounded', speed: 42, start: 88,
   },
   {
     wrap: 'mt-[12vw] ml-auto mr-[4vw] w-[66vw] md:-mt-[4vw] md:ml-[26vw] md:mr-0 md:w-[44vw]',
