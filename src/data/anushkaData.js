@@ -197,7 +197,7 @@ Here's to the next chapter.
 // Updated website content
   /* 6 — INDIA → PARIS */
   journey: {
-    intro: 'And then you moved.',
+    intro: 'New chapter begins...',
     route: 'Pune → Rouen',
     from: { label: 'Pune', coords: '20.59° N, 78.96° E' },
     to: { label: 'Rouen', coords: '49.44° N 1.09° E' },
